@@ -149,14 +149,43 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 30
 text = "Last Time: 0"
 
-[node name="PatchLabel" type="Label" parent="HUD"]
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LinkButton" type="LinkButton" parent="HUD/Control"]
+layout_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -59.0
 offset_top = -23.0
+offset_right = -6.0
+offset_bottom = 17.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Source Code"
+uri = "https://github.com/Raupinger/Skydive"
+
+[node name="PatchLabel" type="Label" parent="HUD/Control"]
+layout_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -39.0
+offset_right = -3.0
+offset_bottom = -13.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Patch 3"
