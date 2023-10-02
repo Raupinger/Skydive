@@ -1,0 +1,163 @@
+[gd_scene load_steps=19 format=3 uid="uid://kfevwa2bl2b3"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_f7dr0"]
+[ext_resource type="PackedScene" uid="uid://b0tm04bveq2hh" path="res://obstacles.tscn" id="1_puiys"]
+[ext_resource type="Script" path="res://main.gd" id="1_r55be"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="2_2xdfo"]
+[ext_resource type="Script" path="res://Area3D.gd" id="2_6nl7r"]
+[ext_resource type="Script" path="res://HUD.gd" id="5_o8euo"]
+[ext_resource type="Theme" uid="uid://bek44u0mjhib6" path="res://new_theme.tres" id="5_vp0yq"]
+[ext_resource type="Script" path="res://TimeLabel.gd" id="6_xlex7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ldjep"]
+size = Vector3(1, 0.517115, 1.46788)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b577q"]
+transparency = 1
+albedo_color = Color(0.141176, 1, 0.188235, 0.568627)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lxkq6"]
+material = SubResource("StandardMaterial3D_b577q")
+size = Vector3(1, 0.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bqul"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttitc"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eleks"]
+material = SubResource("StandardMaterial3D_ttitc")
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_43tnm"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1j1bp"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="Theme" id="Theme_h105i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3d1ah"]
+size = Vector3(114.491, 3.94021, 95.4724)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_r55be")
+
+[node name="obstacles" parent="." instance=ExtResource("1_puiys")]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45075, 5.3448, 9.84029)
+rotation_edit_mode = 1
+script = ExtResource("1_f7dr0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("BoxShape3D_ldjep")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 0.0182698, 0.999833, 0, -0.999833, 0.0182698, 0, 2, 0.3)
+rotation_edit_mode = 1
+current = true
+script = ExtResource("2_2xdfo")
+
+[node name="playermesh" type="MeshInstance3D" parent="CharacterBody3D"]
+rotation_edit_mode = 1
+mesh = SubResource("BoxMesh_lxkq6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.96886, 0.247608, 0, -0.247608, 0.96886, 0, 0, 46.1421)
+
+[node name="end_trigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -236.148, 0)
+script = ExtResource("2_6nl7r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="end_trigger"]
+shape = SubResource("BoxShape3D_1bqul")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="end_trigger"]
+mesh = SubResource("PlaneMesh_eleks")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.151261, -0.456436, 0.876805, 0, 0.887011, 0.461749, -0.988494, -0.0698445, 0.13417, 0.362503, 31.5981, -12.9375)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77031, 4.17311, 10.8314)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_43tnm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_1j1bp")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("5_o8euo")
+
+[node name="TimeLabel" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme = SubResource("Theme_h105i")
+theme_override_font_sizes/font_size = 30
+text = "0
+"
+horizontal_alignment = 1
+script = ExtResource("6_xlex7")
+
+[node name="controls" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -432.5
+offset_top = -178.0
+offset_right = 432.5
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_vp0yq")
+theme_override_font_sizes/font_size = 64
+text = "Hit all checkpoints!
+Controls:
+WASD: move 
+Space: dive
+press any key to start"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HighscoreLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "Highscore: 0"
+
+[node name="PatchLabel" type="Label" parent="HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Patch 1"
+
+[node name="start_trigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63302, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="start_trigger"]
+shape = SubResource("BoxShape3D_3d1ah")
+
+[connection signal="respawn" from="." to="CharacterBody3D" method="_on_main_respawn"]
+[connection signal="respawn" from="." to="HUD/TimeLabel" method="_on_main_respawn"]
+[connection signal="body_entered" from="end_trigger" to="HUD/TimeLabel" method="_on_end_trigger_body_entered"]
+[connection signal="body_exited" from="end_trigger" to="CharacterBody3D" method="_on_end_trigger_body_exited"]
+[connection signal="body_entered" from="start_trigger" to="HUD/TimeLabel" method="_on_start_trigger_body_entered"]
