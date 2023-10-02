@@ -22,8 +22,13 @@ func _on_checkpoint_hit(body):
 func submit_score(time):
 	
 	print("scored %s.%03d" % [floor(time / 1000), time % 1000])
-	if checkpoints.size() <= hits && (time < highscore || highscore == 0) :
-		print("New Highscore!")
-		highscore = time
-		get_node("%HighscoreLabel").text = "Highscore: %s.%03d" % [floor(time / 1000), time % 1000] 
+	if checkpoints.size() <= hits:
+		if(time < highscore || highscore == 0) :
+			print("New Highscore!")
+			get_node("%HighscoreLabel").text = "Best Time: %s.%03d" % [floor(time / 1000), time % 1000] 
+			highscore = time
+		get_node("%LastscoreLabel").add_theme_color_override("font_color", Color.GREEN)
+	else:
+		get_node("%LastscoreLabel").add_theme_color_override("font_color", Color.RED)
+	get_node("%LastscoreLabel").text = "Last Time: %s.%03d" % [floor(time / 1000), time % 1000] 
 	hits = 0

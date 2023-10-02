@@ -136,7 +136,18 @@ unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 30
-text = "Highscore: 0"
+text = "Best Time: 0"
+
+[node name="LastscoreLabel" type="Label" parent="HUD/HighscoreLabel"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 3.0
+offset_top = 38.0
+offset_right = 175.0
+offset_bottom = 83.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 30
+text = "Last Time: 0"
 
 [node name="PatchLabel" type="Label" parent="HUD"]
 anchors_preset = 3
@@ -148,7 +159,7 @@ offset_left = -40.0
 offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Patch 1"
+text = "Patch 3"
 
 [node name="start_trigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63302, 0)
