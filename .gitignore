@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
 Skydive.x86_64
+web/
